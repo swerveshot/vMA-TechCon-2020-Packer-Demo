@@ -34,7 +34,7 @@ jobs:
     - name: Run Packer Container - Build & Deploy
       run: /home/rudolf/packer-nightly/packer build -only vsphere-iso \
         -var template_name="[{{isotime \"20060102T150405-0700\"}}]-vMATechCon2020-Debian" \
-        -var template_sourcedir="{{env `USERPROFILE`}}/Downloads" \
+        -var template_sourcedir="/mnt/hgfs/Downloads" \
         -var template_outputdir="{{env `USERPROFILE`}}/Documents/Virtual Machines/{{user `template_name`}}" \
         -var os_hostname="debian" \
         -var os_username="vmatechcon" \
