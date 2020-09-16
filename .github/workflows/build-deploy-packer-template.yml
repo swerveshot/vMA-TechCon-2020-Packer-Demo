@@ -39,6 +39,6 @@ jobs:
         -var os_username="vmatechcon" 
         -var os_password="VMware1!" 
         -var vsphere_hostname="192.168.159.155" 
-        -var vsphere_username="root" 
+        -var vsphere_username="${{ secrets.VSPHERE_USERNAME }}"
         -var vsphere_password="VMware1!" 
         $GITHUB_WORKSPACE/${{ matrix.template }}
