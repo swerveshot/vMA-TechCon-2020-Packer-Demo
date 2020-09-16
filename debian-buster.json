@@ -1,0 +1,51 @@
+{
+  "builders": [
+    {
+      "type"              : "vmware-iso",
+      "iso_url"           : "{{user `template_sourcedir`}}/debian-10.4.0-amd64-netinst.iso",
+      "iso_checksum"     : "none",
+      "cpus"              : 2,
+      "memory"            : 1024,
+      "version"           : 10,
+      "guest_os_type"     : "debian10-64",
+      "disk_adapter_type" : "lsisas1068",
+      "vm_name"           : "{{user `template_name`}}",
+      "vmdk_name"         : "{{user `template_name`}}",
+      "communicator"      : "ssh",
+      "ssh_username"    : "{{user `os_username`}}",
+      "ssh_password"    : "{{user `os_password`}}",
+      "ssh_timeout"     : "4h",
+      "shutdown_command"  : "echo 'VMware1!' | sudo -S shutdown -P now",
+      "shutdown_timeout"  : "30m",
+      "skip_compaction"   : true,
+      "output_directory"  : "{{user `template_outputdir`}}",
+      "headless"          : false,
+      "http_directory"    : "{{template_dir}}/setup/Debian",
+      "boot_command": [
+        "<esc><wait>",
+        "install <wait>",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "debian-installer=en_US.UTF-8 <wait>",
+        "auto <wait>",
+        "locale=en_US.UTF-8 <wait>",
+        "kbd-chooser/method=us <wait>",
+        "keyboard-configuration/xkb-keymap=us <wait>",
+        "netcfg/get_hostname=debian <wait>",
+        "netcfg/get_domain=local <wait>",
+        "fb=false <wait>",
+        "debconf/frontend=noninteractive <wait>",
+        "console-setup/ask_detect=false <wait>",
+        "console-keymaps-at/keymap=us <wait>",
+        "grub-installer/bootdev=/dev/sda <wait>",
+        "<enter><wait>"
+      ]
+    }
+],
+
+"provisioners": [
+  {
+    "type": "shell",
+    "inline": ["echo -e \"\nIPv4 address: \\4{ens33}\n\" >> /etc/issue"]
+  }
+]
+}

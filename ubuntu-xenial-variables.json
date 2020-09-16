@@ -1,0 +1,11 @@
+{
+  "template_name"       : "[{{isotime \"20060102T150405-0700\"}}]-vMATechCon2020-Ubuntu",
+  "template_sourcedir"  : "{{env `USERPROFILE`}}/Downloads",
+  "template_outputdir"  : "{{env `USERPROFILE`}}/Documents/Virtual Machines/{{user `template_name`}}",
+  "os_hostname"         : "ubuntu",
+  "os_username"         : "vmatechcon",
+  "os_password"         : "VMware1!",
+  "vsphere_hostname"    : "192.168.159.155",
+  "vsphere_username"    : "root",
+  "vsphere_password"    : "VMware1!"
+}

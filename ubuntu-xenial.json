@@ -1,0 +1,105 @@
+{
+  "builders": [
+    {
+      "type"              : "vmware-iso",
+      "iso_url"           : "{{user `template_sourcedir`}}/ubuntu-16.04.1-server-amd64.iso",
+      "iso_checksum"      : "none",
+      "cpus"              : 2,
+      "memory"            : 1024,
+      "version"           : 10,
+      "guest_os_type"     : "ubuntu-64",
+      "disk_adapter_type" : "lsisas1068",
+      "vm_name"           : "{{user `template_name`}}",
+      "vmdk_name"         : "{{user `template_name`}}",
+      "communicator"      : "ssh",
+      "ssh_username"    : "{{user `os_username`}}",
+      "ssh_password"    : "{{user `os_password`}}",
+      "ssh_timeout"     : "4h",
+      "shutdown_command"  : "echo 'VMware1!' | sudo -S shutdown -P now",
+      "shutdown_timeout"  : "30m",
+      "skip_compaction"   : true,
+      "output_directory"  : "{{user `template_outputdir`}}",
+      "headless"          : false,
+      "http_directory"    : "{{template_dir}}/setup/Ubuntu",
+      "boot_command": [
+        "<enter><wait><f6><wait><esc><wait>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs>",
+        "/install/vmlinuz",
+        " initrd=/install/initrd.gz",
+        " priority=critical",
+        " locale=en_US",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        "<enter>"
+      ]
+    },
+
+    {
+      "type": "vsphere-iso",
+      "vcenter_server":      "{{user `vsphere_hostname`}}",
+      "username":            "{{user `vsphere_username`}}",
+      "password":            "{{user `vsphere_password`}}",
+      "insecure_connection": "true",
+      "iso_url": "{{user `template_sourcedir`}}/ubuntu-16.04.1-server-amd64.iso",
+      "iso_checksum" : "none",
+      "CPUs":             2,
+      "RAM":              1024,
+      "RAM_reserve_all": true,
+      "guest_os_type": "ubuntu64Guest",
+      "disk_controller_type": ["pvscsi"],
+      "storage": [
+        {
+          "disk_size": 4096,
+          "disk_thin_provisioned": true
+        }
+      ],
+      "vm_name": "{{user `template_name`}}",
+      "ssh_username": "{{user `os_username`}}",
+      "ssh_password": "{{user `os_password`}}",
+      "notes": "Test van Rudolf om software-defined nieuwe VM templates te maken. Kan dus prima weggegooid worden.",
+      "host": "localhost.localdomain",
+      "datastore": "datastore1",
+      "network_adapters": [
+        {
+          "network": "VM Network",
+          "network_card": "vmxnet3"
+        }
+      ],
+     "convert_to_template": false,
+     "http_directory": "{{template_dir}}/setup/Ubuntu",
+     "boot_wait": "20s",
+     "boot_command": [
+        "<enter><wait><f6><wait><esc><wait>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs>",
+        "/install/vmlinuz",
+        " initrd=/install/initrd.gz",
+        " priority=critical",
+        " locale=en_US",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        "<enter>"
+      ]
+    }
+],
+
+"provisioners": [
+  {
+    "type": "shell",
+    "inline": ["ls /"]
+  }
+]
+}
