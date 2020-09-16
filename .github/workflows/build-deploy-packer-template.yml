@@ -35,4 +35,4 @@ jobs:
       # pull official hashicorp packer container for docker hub
       uses: docker://hashicorp/packer:light
       with:
-        args: "build -var os_username=foo -var template_source=bar /github/workspace/${{ matrix.template }}"
+        args: "build -only vsphere-iso -var os_username=foo -var template_source=bar /github/workspace/${{ matrix.template }}"
