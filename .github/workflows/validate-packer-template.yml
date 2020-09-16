@@ -32,7 +32,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run Packer Container - Validate Template ${{ matrix.template }}
       # pull official hashicorp packer container for docker hub
-      uses: docker://hashicorp/packer:1.5.6
+      uses: docker://hashicorp/packer:light
       with:
         # For some reason user variables passed as argument work fine enclosed in single quotes when using a self-hosted container
         # On a GitHub shared container the workflow only completes succesfully when the quotes are removed
