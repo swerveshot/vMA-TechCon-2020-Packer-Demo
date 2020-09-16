@@ -32,13 +32,13 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Run Packer Container - Build & Deploy
-      run: /home/rudolf/packer-nightly/packer build -only vsphere-iso \
-        -var template_name="[{{isotime \"20060102T150405-0700\"}}]-vMATechCon2020-Debian" \
-        -var template_sourcedir="/mnt/hgfs/Downloads" \
-        -var os_hostname="debian" \
-        -var os_username="vmatechcon" \
-        -var os_password="VMware1!" \
-        -var vsphere_hostname="192.168.159.155" \
-        -var vsphere_username="root" \
-        -var vsphere_password="VMware1!" \
+      run: /home/rudolf/packer-nightly/packer build -only vsphere-iso 
+        -var template_name="[{{isotime \"20060102T150405-0700\"}}]-vMATechCon2020-Debian" 
+        -var template_sourcedir="/mnt/hgfs/Downloads" 
+        -var os_hostname="debian" 
+        -var os_username="vmatechcon" 
+        -var os_password="VMware1!" 
+        -var vsphere_hostname="192.168.159.155" 
+        -var vsphere_username="root" 
+        -var vsphere_password="VMware1!" 
         $GITHUB_WORKSPACE/${{ matrix.template }}
