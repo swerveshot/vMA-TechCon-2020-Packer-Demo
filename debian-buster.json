@@ -99,7 +99,7 @@
 "provisioners": [
   {
     "type": "shell",
-    "inline": ["ls /"]
+    "inline": ["figlet Welcome to vMA TechCon 2020 !"]
   }
 ]
 }
