@@ -2,17 +2,8 @@
 
 name: Build & Deploy Packer Template
 
-# Trigger the workflow on push to all but the master branch
-# and trigger on pull request to master
+# Trigger the workflow on pull request to master
 on: 
-  push:
-    branches: 
-      - '!master'
-    # Only run workflow when JSON or YAML files are changed
-    paths:
-      # Run on any changes to the workflows directory and json files
-      - '.github/workflows/**'
-      - '**.json'
   pull_request:
     branches:
       - master
