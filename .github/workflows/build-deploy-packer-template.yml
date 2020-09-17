@@ -1,0 +1,37 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build & Deploy Packer Template
+
+# Trigger the workflow on pull request to master
+on: 
+  pull_request:
+    branches:
+      - master
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Build the packer template and deploy to AWS
+  build:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted, linux]
+    # Run Packer with verbose logging
+    env:
+      PACKER_LOG: 0
+    strategy:
+      matrix:
+        template: ["debian-buster.json"]
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    - name: Run Packer - Build & Deploy ${{ matrix.template }}
+      run: /home/rudolf/packer-nightly/packer build -only vsphere-iso 
+        -var template_name="[{{isotime \"20060102T150405-0700\"}}]-vMATechCon2020-Debian" 
+        -var template_sourcedir="/mnt/hgfs/Downloads" 
+        -var os_hostname="debian" 
+        -var os_username="${{ secrets.OS_USERNAME }}" 
+        -var os_password="${{ secrets.OS_PASSWORD }}" 
+        -var vsphere_hostname="${{ secrets.VSPHERE_HOSTNAME }}" 
+        -var vsphere_username="${{ secrets.VSPHERE_USERNAME }}" 
+        -var vsphere_password="${{ secrets.VSPHERE_PASSWORD }}" 
+        $GITHUB_WORKSPACE/${{ matrix.template }}
