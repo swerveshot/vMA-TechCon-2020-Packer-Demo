@@ -25,7 +25,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Run Packer - Build & Deploy ${{ matrix.template }}
-      run: /home/rudolf/packer-nightly/packer build -only vsphere-iso 
+      run: /home/rudolf/packer-nightly/packer build -only vsphere-iso -timestamp-ui 
         -var template_name="[{{isotime \"20060102T150405-0700\"}}]-vMATechCon2020-Debian" 
         -var template_sourcedir="/mnt/hgfs/Downloads" 
         -var os_hostname="debian" 
