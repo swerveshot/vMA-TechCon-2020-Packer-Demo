@@ -6,7 +6,7 @@ name: Build & Deploy Packer Template
 # and trigger on pull request to master
 on: 
   push:
-    branches-ignore: master
+    branches-ignore: '!master'
     # Only run workflow when JSON or YAML files are changed
     paths:
       # Run on any changes to the workflows directory and json files
