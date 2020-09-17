@@ -3,7 +3,7 @@
     {
       "type"              : "vmware-iso",
       "iso_url"           : "{{user `template_sourcedir`}}/debian-10.4.0-amd64-netinst.iso",
-      "iso_checksum"     : "none",
+      "iso_checksum"     : "sha1:4cb66b8ffcd8d067d97d936ee35721ef5596635a",
       "cpus"              : 2,
       "memory"            : 1024,
       "version"           : 10,
@@ -48,7 +48,7 @@
       "password":            "{{user `vsphere_password`}}",
       "insecure_connection": "true",
       "iso_url": "{{user `template_sourcedir`}}/debian-10.4.0-amd64-netinst.iso",
-      "iso_checksum" : "none",
+      "iso_checksum" : "sha1:4cb66b8ffcd8d067d97d936ee35721ef5596635a",
       "CPUs":             2,
       "RAM":              1024,
       "RAM_reserve_all": false,
