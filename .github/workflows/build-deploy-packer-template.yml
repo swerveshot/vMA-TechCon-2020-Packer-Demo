@@ -23,7 +23,7 @@ jobs:
     runs-on: [self-hosted, linux]
     # Run Packer with verbose logging
     env:
-      PACKER_LOG: 1
+      PACKER_LOG: 0
     strategy:
       matrix:
         template: ["debian-buster.json"]
