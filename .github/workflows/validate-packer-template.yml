@@ -36,4 +36,12 @@ jobs:
       with:
         # For some reason user variables passed as argument work fine enclosed in single quotes when using a self-hosted container
         # On a GitHub shared container the workflow only completes succesfully when the quotes are removed
-        args: "validate -var os_username=foo -var template_source=bar /github/workspace/${{ matrix.template }}"
+        args: validate 
+          -var template_name="[{{isotime \"20060102T150405-0700\"}}]-vMATechCon2020-Debian" 
+          -var template_sourcedir="foo" 
+          -var os_username="${{ secrets.OS_USERNAME }}" 
+          -var os_password="${{ secrets.OS_PASSWORD }}" 
+          -var vsphere_hostname="${{ secrets.VSPHERE_HOSTNAME }}" 
+          -var vsphere_username="${{ secrets.VSPHERE_USERNAME }}" 
+          -var vsphere_password="${{ secrets.VSPHERE_PASSWORD }}" 
+          /github/workspace/${{ matrix.template }}
