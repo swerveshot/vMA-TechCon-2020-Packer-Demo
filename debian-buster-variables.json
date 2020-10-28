@@ -7,5 +7,6 @@
   "os_password"         : "VMware1!",
   "vsphere_hostname"    : "192.168.159.155",
   "vsphere_username"    : "root",
-  "vsphere_password"    : "VMware1!"
+  "vsphere_password"    : "VMware1!",
+  "builder_ip"          : "192.168.159.1"
 }
