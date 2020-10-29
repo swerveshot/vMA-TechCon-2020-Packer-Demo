@@ -3,7 +3,7 @@
     {
       "type"              : "vmware-iso",
       "iso_url"           : "{{user `template_sourcedir`}}/debian-10.4.0-amd64-netinst.iso",
-      "iso_checksum"     : "sha1:4cb66b8ffcd8d067d97d936ee35721ef5596635a",
+      "iso_checksum"      : "sha1:4cb66b8ffcd8d067d97d936ee35721ef5596635a",
       "cpus"              : 2,
       "memory"            : 1024,
       "version"           : 10,
@@ -12,9 +12,9 @@
       "vm_name"           : "{{user `template_name`}}",
       "vmdk_name"         : "{{user `template_name`}}",
       "communicator"      : "ssh",
-      "ssh_username"    : "{{user `os_username`}}",
-      "ssh_password"    : "{{user `os_password`}}",
-      "ssh_timeout"     : "4h",
+      "ssh_username"      : "{{user `os_username`}}",
+      "ssh_password"      : "{{user `os_password`}}",
+      "ssh_timeout"       : "4h",
       "shutdown_command"  : "echo 'VMware1!' | sudo -S shutdown -P now",
       "shutdown_timeout"  : "30m",
       "skip_compaction"   : true,
@@ -42,40 +42,40 @@
     },
 
     {
-      "type": "vsphere-iso",
-      "vcenter_server":      "{{user `vsphere_hostname`}}",
-      "username":            "{{user `vsphere_username`}}",
-      "password":            "{{user `vsphere_password`}}",
-      "insecure_connection": "true",
-      "iso_url": "{{user `template_sourcedir`}}/debian-10.4.0-amd64-netinst.iso",
-      "iso_checksum" : "sha1:4cb66b8ffcd8d067d97d936ee35721ef5596635a",
-      "CPUs":             2,
-      "RAM":              1024,
-      "RAM_reserve_all": false,
-      "guest_os_type": "ubuntu64Guest",
-      "disk_controller_type": ["pvscsi"],
+      "type"                 : "vsphere-iso",
+      "vcenter_server"       : "{{user `vsphere_hostname`}}",
+      "username"             : "{{user `vsphere_username`}}",
+      "password"             : "{{user `vsphere_password`}}",
+      "insecure_connection"  : "true",
+      "iso_url"              : "{{user `template_sourcedir`}}/debian-10.4.0-amd64-netinst.iso",
+      "iso_checksum"         : "sha1:4cb66b8ffcd8d067d97d936ee35721ef5596635a",
+      "CPUs"                 : 2,
+      "RAM"                  : 1024,
+      "RAM_reserve_all"      : false,
+      "guest_os_type"        : "ubuntu64Guest",
+      "disk_controller_type" : ["pvscsi"],
       "storage": [
         {
           "disk_size": 4096,
           "disk_thin_provisioned": true
         }
       ],
-      "vm_name": "{{user `template_name`}}",
-      "ssh_username": "{{user `os_username`}}",
-      "ssh_password": "{{user `os_password`}}",
-      "notes": "Test van Rudolf om software-defined nieuwe VM templates te maken. Kan dus prima weggegooid worden.",
-      "host": "localhost.localdomain",
-      "datastore": "datastore1",
-      "network_adapters": [
+      "vm_name"              : "{{user `template_name`}}",
+      "ssh_username"         : "{{user `os_username`}}",
+      "ssh_password"         : "{{user `os_password`}}",
+      "notes"                : "Test van Rudolf om software-defined nieuwe VM templates te maken. Kan dus prima weggegooid worden.",
+      "host"                 : "localhost.localdomain",
+      "datastore"            : "datastore1",
+      "network_adapters"     : [
         {
           "network": "VM Network",
           "network_card": "vmxnet3"
         }
       ],
-     "convert_to_template": false,
-     "http_directory": "{{template_dir}}/setup/Debian",
-     "boot_wait": "20s",
-     "boot_command": [
+     "convert_to_template"   : false,
+     "http_directory"        : "{{template_dir}}/setup/Debian",
+     "boot_wait"             : "20s",
+     "boot_command"          : [
       "<esc><wait>",
       "install <wait>",
       "preseed/url=http://{{ user `builder_ip` }}:{{ .HTTPPort }}/preseed.cfg <wait>",
@@ -98,8 +98,8 @@
 
 "provisioners": [
   {
-    "type": "shell",
-    "inline": ["figlet Welcome to vMA TechCon 2020 - Get set!"]
+    "type"                   : "shell",
+    "inline"                 : ["figlet Welcome to vMA TechCon 2020 - GO!"]
   }
 ]
 }
